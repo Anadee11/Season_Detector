@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Season_Detector/static/css/main.f65121b1.css",
+    "main.js": "/Season_Detector/static/js/main.bf97225f.js",
+    "index.html": "/Season_Detector/index.html",
+    "main.f65121b1.css.map": "/Season_Detector/static/css/main.f65121b1.css.map",
+    "main.bf97225f.js.map": "/Season_Detector/static/js/main.bf97225f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f65121b1.css",
+    "static/js/main.bf97225f.js"
+  ]
+}
