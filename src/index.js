@@ -1,17 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import SeasonDisplay from "./SeasonDisplay";
+import Spinner from "./Spinner";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class App extends React.Component {
+    // constructor(props){
+    //     super(props);
+    //     this.state = {lat: null, errMessage:''} 
+    // }
+    state = { lat: null, errMessage: '' }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    componentDidMount() {
+        window.navigator.geolocation.getCurrentPosition(
+            (position) => this.setState({ lat: position.coords.latitude }),
+            (err) => this.setState({ errMessage: err.message })
+        );
+    }
+    renderContent() {
+        if (!this.state.errMessage && this.state.lat) {
+            return (
+                <div> <SeasonDisplay lat={this.state.lat} /> </div>
+            );
+        }
+        if (this.state.errMessage && !this.state.lat) {
+            return (
+                <div>Error : {this.state.errMessage}</div>
+            );
+        }
+        return <div><Spinner message="Please allow location request" /></div>
+    }
+    render() {
+        return(
+        <div>
+            {this.renderContent()}
+        </div>
+        );
+    };
+
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
